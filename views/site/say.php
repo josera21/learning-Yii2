@@ -4,6 +4,6 @@
  
 
  <h1 class="text-primary">
- 	Welcome! 
+ 	Welcome user! 
  	<?= Html::encode($mensaje) ?>
  </h1>
