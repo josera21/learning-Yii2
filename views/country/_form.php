@@ -12,11 +12,11 @@ use yii\widgets\ActiveForm;
 	<div class="col-md-6">
 	    <?php $form = ActiveForm::begin(); ?>
 
-	    <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
+	    <?= $form->field($model, 'code')->textInput(['maxlength' => true])->label('Codigo') ?>
 
-	    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+	    <?= $form->field($model, 'name')->textInput(['maxlength' => true])->label('Nombre') ?>
 
-	    <?= $form->field($model, 'population')->textInput() ?>
+	    <?= $form->field($model, 'population')->textInput()->label('Poblacion') ?>
 
 	    <div class="form-group">
 	        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
