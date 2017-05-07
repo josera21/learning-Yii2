@@ -6,27 +6,51 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'modules' => [
+        'user' => [
+            'class' => 'dektrium\user\Module',
+            'enableUnconfirmedLogin' => true,
+            'confirmWithin' => 21600,
+            'cost' => 12,
+            'admins' => ['joseadmin'],
+            'modelMap' => [
+                'User' => 'app\models\User',
+                'RegistrationForm' => 'app\models\RegistrationForm',
+            ],
+        ],  
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '123465',
         ],
+        // Sobrescribiendo views para dektrim
+        'view' => [
+            'theme' => [
+            'pathMap' => [
+                '@dektrium/user/views' => '@app/views/user',
+                '@dektrium/user/models' => '@app/models'
+                ],
+            ],
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
-        ],
-        'user' => [
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'viewPath' => '@app/mailer',
+            'useFileTransport' => false,
+            'transport' => [
+            'class' => 'Swift_SmtpTransport',
+            'host' => 'smtp.gmail.com',
+            'username' => 'jochix21@gmail.com',
+            'password' => 'obhfzdnumhmlybpd',
+            'port' => '587',
+            'encryption' => 'tls',
+                        ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

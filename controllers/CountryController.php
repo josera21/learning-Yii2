@@ -5,9 +5,13 @@ namespace app\controllers;
 use Yii;
 use app\models\Country;
 use app\models\CountrySearch;
+use app\models\User;
+use app\components\AccessRule;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+//use dektrium\user\filters\AccessRule;
 
 /**
  * CountryController implements the CRUD actions for Country model.
@@ -23,7 +27,40 @@ class CountryController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => AccessRule::className(),
+                ],
+                'only' => ['index','create', 'update', 'delete'],
+                'rules' => [
+                    [
+                        'actions' => ['create','update','delete'],
+                        'allow' => true,
+                        'roles' => 
+                        [
+                            User::ROLE_ADMIN
+                        ],
+                    ],
+                    [
+                        'actions' => ['create','update'],
+                        'allow' => true,
+                        'roles' => 
+                        [
+                            User::ROLE_MODERATOR
+                        ],
+                    ],
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => 
+                        [
+                            User::ROLE_USER
+                        ],
+                    ],
                 ],
             ],
         ];

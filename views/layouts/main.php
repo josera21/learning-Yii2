@@ -33,28 +33,32 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+    
+    $navItems=[
+        ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'Status', 'url' => ['/user/admin/index']],
+        ['label' => 'Country', 'url' => ['/country']],
+        ['label' => 'Config accont', 'url' => ['/user/settings/account']],
+        ['label' => 'Test', 'url' => ['/site/say']],
+        ['label' => 'About', 'url' => ['/site/about']],
+        ['label' => 'Contact', 'url' => ['/site/contact']]
+      ];
+      
+      if (Yii::$app->user->isGuest) {
+        array_push($navItems,['label' => 'Sign In', 'url' => ['/user/security/login']],['label' => 'Sign Up', 'url' => ['/user/registration/register']]);
+      } else {
+        array_push($navItems,['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+            'url' => ['/site/logout'],
+            'linkOptions' => ['data-method' => 'post']]
+        );
+      }
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Test', 'url' => ['/site/say']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            ['label' => 'Entry', 'url' => ['/site/entry']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
+        'items' => $navItems,
     ]);
+
+
     NavBar::end();
     ?>
 
