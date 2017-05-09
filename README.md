@@ -7,9 +7,7 @@
 
 * Ejecuta los siguientes comandos para estar en la raiz
   ```sh 
-  cd ..
-  
-  cd ..
+  cd \
   ```
   Luego que estes en la raiz ejecuta.
   
