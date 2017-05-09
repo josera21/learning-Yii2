@@ -14,7 +14,7 @@ class RegistrationForm extends BaseRegistrationForm
 	public function rules()
 	{
 		$rules = parent::rules();
-        $rules['fieldRequired'] = ['role', 'required'];
+        //$rules['fieldRequired'] = ['role', 'required'];
         $rules['fieldLength']   = ['role', 'string', 'max' => 10];
         $rules[] = ['name','required'];
         return $rules;

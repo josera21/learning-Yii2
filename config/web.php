@@ -28,8 +28,7 @@ $config = [
         'view' => [
             'theme' => [
             'pathMap' => [
-                '@dektrium/user/views' => '@app/views/user',
-                '@dektrium/user/models' => '@app/models'
+                '@dektrium/user/views' => '@app/views/user'
                 ],
             ],
         ],
@@ -44,13 +43,13 @@ $config = [
             'viewPath' => '@app/mailer',
             'useFileTransport' => false,
             'transport' => [
-            'class' => 'Swift_SmtpTransport',
-            'host' => 'smtp.gmail.com',
-            'username' => 'jochix21@gmail.com',
-            'password' => 'obhfzdnumhmlybpd',
-            'port' => '587',
-            'encryption' => 'tls',
-                        ],
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => 'jochix21@gmail.com',
+                'password' => 'obhfzdnumhmlybpd',
+                'port' => '587',
+                'encryption' => 'tls',
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

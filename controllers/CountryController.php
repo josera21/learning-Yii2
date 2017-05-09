@@ -35,10 +35,9 @@ class CountryController extends Controller
                 'ruleConfig' => [
                     'class' => AccessRule::className(),
                 ],
-                'only' => ['index','create', 'update', 'delete'],
                 'rules' => [
                     [
-                        'actions' => ['create','update','delete'],
+                        'actions' => ['create','index','update'],
                         'allow' => true,
                         'roles' => 
                         [
@@ -46,7 +45,7 @@ class CountryController extends Controller
                         ],
                     ],
                     [
-                        'actions' => ['create','update'],
+                        'actions' => ['index','update'],
                         'allow' => true,
                         'roles' => 
                         [

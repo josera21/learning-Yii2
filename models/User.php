@@ -5,7 +5,12 @@ namespace app\models;
 use dektrium\user\models\User as BaseUser;
 
 class User extends BaseUser
-{
+{   
+    // Roles
+    const ROLE_USER = "usuario";
+    const ROLE_MODERATOR = "moderador";
+    const ROLE_ADMIN = "admin";
+
     public function scenarios()
     {
         $scenarios = parent::scenarios();
@@ -15,19 +20,4 @@ class User extends BaseUser
         $scenarios['register'][] = 'role';
         return $scenarios;
     }
-
-    public function rules()
-    {
-        $rules = parent::rules();
-        // add some rules
-        $rules['fieldRequired'] = ['role', 'required'];
-        $rules['fieldLength']   = ['role', 'string', 'max' => 10];
-        
-        return $rules;
-    }
-
-    // Roles
-    const ROLE_USER = "usuario";
-    const ROLE_MODERATOR = "moderador";
-    const ROLE_ADMIN = "admin";
 }
